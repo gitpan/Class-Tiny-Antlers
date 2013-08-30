@@ -1,0 +1,45 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.70.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 294505f858f11dd062e9916e3f50d88210a9ef54 CONTRIBUTING
+SHA1 804fc1e0e23decc85059fe9611fd8515e6a389e8 COPYRIGHT
+SHA1 6bd7b17d81be63d08d4efa6cb80106e72887842c CREDITS
+SHA1 7d254de5392ec455cc909ef78f6d94075f04fd34 Changes
+SHA1 ec5a7b4f3023f03ebf821b57690758f7e6f3ae2a LICENSE
+SHA1 ca5b1b85d00326112a760300b4366d4d179ce491 MANIFEST
+SHA1 a3b30b253093fb0d3f09d57db07165acf8e177dd META.json
+SHA1 4014ad6b9bf80c54afb86d09949d23b0cd7ca44a META.yml
+SHA1 0385149190b9722cb69941a779a5409157ed5f99 Makefile.PL
+SHA1 1369492d106ebb995095f885d6e1ea06658ab86f README
+SHA1 e80c97aa5cb5d4c4f61ce9d5c61a576ec3013d2b dist.ini
+SHA1 601facd804703979e709d990b8158cdbac6d9f0f doap.ttl
+SHA1 7822b45df785aeec802bfe8f06d4baf6cb7be88f lib/Class/Tiny/Antlers.pm
+SHA1 342ee9474bf97dff7f8415762bbc0e4fc6a0da90 t/01basic.t
+SHA1 06e435a380481e4edf2fea30f84275c0d2fc9357 t/02ro-rw-rwp-bare.t
+SHA1 716d0ca2e87e655dc5e7d5967961f9df26dcd036 t/03defaults.t
+SHA1 c20b0179f5f3c948c04b6f961d84a215aa481732 t/04predicates-clearers.t
+SHA1 edd7eb8f7c3c3a0f756c50a60bbae8b477ae07eb t/05init_arg.t
+SHA1 9cc547b42d220ecf038c6cd0324f5f8129508019 t/06required.t
+SHA1 28fd11529be0814c98790e7f1d5c3678567d3456 t/07extends.t
+SHA1 c7e91bf6d4d6f4db95b3dd6fe7b63a2c99f618ca t/08with.t
+SHA1 5ee7a4ac9939cb4300ece9e8832a1eb7c8be1e49 t/09hygiene.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.12 (GNU/Linux)
+
+iEYEARECAAYFAlIf7XcACgkQzr+BKGoqfTktJACghgd1kIEte4PxiIjNLYXVnhRv
+SG4An327TZwubpKUgZFh3s7NmyUNzIIm
+=8qlG
+-----END PGP SIGNATURE-----
