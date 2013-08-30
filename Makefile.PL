@@ -20,16 +20,12 @@ my $meta = {
                             configure => { requires => { "ExtUtils::MakeMaker" => 6.17 } },
                             develop   => { recommends => { "Dist::Inkt" => 0.001 } },
                             runtime   => {
-                                           requires => {
-                                             "Class::Tiny"    => 0.005,
-                                             "Package::Stash" => 0,
-                                             "Role::Tiny"     => "1.000000",
-                                           },
+                                           requires => { "Class::Tiny" => 0.005, "Role::Tiny" => "1.000000" },
                                          },
                             test      => { requires => { "Test::Fatal" => 0.003, "Test::More" => 0.96 } },
                           },
   "provides"           => {
-                            "Class::Tiny::Antlers" => { file => "lib/Class/Tiny/Antlers.pm", version => 0.019 },
+                            "Class::Tiny::Antlers" => { file => "lib/Class/Tiny/Antlers.pm", version => "0.020" },
                           },
   "release_status"     => "stable",
   "resources"          => {
@@ -44,7 +40,7 @@ my $meta = {
                                             },
                             X_identifier => "http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/project",
                           },
-  "version"            => 0.019,
+  "version"            => "0.020",
   "x_provides_scripts" => {},
 };
 

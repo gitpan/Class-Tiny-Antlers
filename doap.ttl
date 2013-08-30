@@ -15,7 +15,7 @@
 	doap-deps:develop-recommendation [ doap-deps:on "Dist::Inkt 0.001"^^doap-deps:CpanId ];
 	doap-deps:runtime-requirement [ doap-deps:on "Class::Tiny 0.005"^^doap-deps:CpanId ], [
 		doap-deps:on "Role::Tiny 1.000000"^^doap-deps:CpanId;
-	], [ doap-deps:on "Package::Stash 0"^^doap-deps:CpanId ];
+	];
 	doap-deps:test-requirement [ doap-deps:on "Test::More 0.96"^^doap-deps:CpanId ], [ doap-deps:on "Test::Fatal 0.003"^^doap-deps:CpanId ];
 	doap:bug-database    <http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers>;
 	doap:created         "2013-08-29"^^xsd:date;
@@ -26,7 +26,7 @@
 	doap:maintainer      <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:name            "Class-Tiny-Antlers";
 	doap:programming-language "Perl";
-	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>;
+	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>;
 	doap:repository      [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-class-tiny-antlers>;
@@ -41,6 +41,20 @@
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.019.tar.gz>;
 	doap:revision        "0.019"^^xsd:string.
+
+<http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>
+	a                    doap:Version;
+	dc:identifier        "Class-Tiny-Antlers-0.020"^^xsd:string;
+	dc:issued            "2013-08-30"^^xsd:date;
+	doap-changeset:changeset [
+		doap-changeset:item [
+			a doap-changeset:Change;
+			rdfs:label "Eliminate dependency on Package::Stash.";
+		];
+	];
+	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
+	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.020.tar.gz>;
+	doap:revision        "0.020"^^xsd:string.
 
 <http://purl.org/NET/cpan-uri/person/tobyink>
 	a                    foaf:Person;

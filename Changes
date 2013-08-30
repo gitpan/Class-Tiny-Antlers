@@ -6,5 +6,9 @@ Home page:    <https://metacpan.org/release/Class-Tiny-Antlers>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.020	2013-08-30
+
+ - (Change) Eliminate dependency on Package::Stash.
+
 0.019	2013-08-30	Initial release; split from Moops 0.018
 

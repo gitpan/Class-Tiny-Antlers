@@ -25,10 +25,9 @@ no_index:
 provides:
   Class::Tiny::Antlers:
     file: lib/Class/Tiny/Antlers.pm
-    version: 0.019
+    version: 0.020
 requires:
   Class::Tiny: 0.005
-  Package::Stash: 0
   Role::Tiny: 1.000000
 resources:
   X_identifier: http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/project
@@ -36,5 +35,5 @@ resources:
   homepage: https://metacpan.org/release/Class-Tiny-Antlers
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tobyink/p5-class-tiny-antlers
-version: 0.019
+version: 0.020
 x_provides_scripts: {}
