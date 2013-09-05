@@ -5,6 +5,7 @@ author:
 build_requires:
   Test::Fatal: 0.003
   Test::More: 0.96
+  Test::Requires: 0.06
 configure_requires:
   ExtUtils::MakeMaker: 6.17
 dynamic_config: 0
@@ -25,10 +26,7 @@ no_index:
 provides:
   Class::Tiny::Antlers:
     file: lib/Class/Tiny/Antlers.pm
-    version: 0.021
-recommends:
-  Class::Method::Modifiers: 1.05
-  Role::Tiny: 1.000000
+    version: 0.022
 requires:
   Class::Tiny: 0.006
 resources:
@@ -37,5 +35,5 @@ resources:
   homepage: https://metacpan.org/release/Class-Tiny-Antlers
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tobyink/p5-class-tiny-antlers
-version: 0.021
+version: 0.022
 x_provides_scripts: {}

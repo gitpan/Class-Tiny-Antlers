@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Class-Tiny-Antlers>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.022	2013-09-05
+
+ [ Packaging ]
+ - Add 'test requires' dependency on Test::Requires - oh, the irony!
+ - Demote Role::Tiny and Class::Method::Modifiers from 'runtime recommends'
+   dependencies to 'runtime suggests', but 'test recommends'.
+
 0.021	2013-09-05
 
  - Actually inherit from Class::Tiny. This means that your class doesn't

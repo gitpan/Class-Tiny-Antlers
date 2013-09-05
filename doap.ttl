@@ -13,13 +13,20 @@
 	a                    doap:Project;
 	dc:contributor       <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap-deps:develop-recommendation [ doap-deps:on "Dist::Inkt 0.001"^^doap-deps:CpanId ];
-	doap-deps:runtime-recommendation [
+	doap-deps:runtime-requirement [ doap-deps:on "Class::Tiny 0.006"^^doap-deps:CpanId ];
+	doap-deps:runtime-suggestion [
 		doap-deps:on "Role::Tiny 1.000000"^^doap-deps:CpanId;
 	], [
 		doap-deps:on "Class::Method::Modifiers 1.05"^^doap-deps:CpanId;
 	];
-	doap-deps:runtime-requirement [ doap-deps:on "Class::Tiny 0.006"^^doap-deps:CpanId ];
-	doap-deps:test-requirement [ doap-deps:on "Test::More 0.96"^^doap-deps:CpanId ], [ doap-deps:on "Test::Fatal 0.003"^^doap-deps:CpanId ];
+	doap-deps:test-recommendation [
+		doap-deps:on "Role::Tiny 1.000000"^^doap-deps:CpanId;
+	], [
+		doap-deps:on "Class::Method::Modifiers 1.05"^^doap-deps:CpanId;
+	];
+	doap-deps:test-requirement [ doap-deps:on "Test::More 0.96"^^doap-deps:CpanId ], [ doap-deps:on "Test::Fatal 0.003"^^doap-deps:CpanId ], [
+		doap-deps:on "Test::Requires 0.06"^^doap-deps:CpanId;
+	];
 	doap:bug-database    <http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers>;
 	doap:created         "2013-08-29"^^xsd:date;
 	doap:developer       <http://purl.org/NET/cpan-uri/person/tobyink>;
@@ -29,7 +36,7 @@
 	doap:maintainer      <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:name            "Class-Tiny-Antlers";
 	doap:programming-language "Perl";
-	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-021>;
+	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-021>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-022>;
 	doap:repository      [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-class-tiny-antlers>;
@@ -87,6 +94,23 @@
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.021.tar.gz>;
 	doap:revision        "0.021"^^xsd:string.
+
+<http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-022>
+	a                    doap:Version;
+	dc:identifier        "Class-Tiny-Antlers-0.022"^^xsd:string;
+	dc:issued            "2013-09-05"^^xsd:date;
+	doap-changeset:changeset [
+		doap-changeset:item [
+			a doap-changeset:Packaging;
+			rdfs:label "Add 'test requires' dependency on Test::Requires - oh, the irony!";
+		], [
+			a doap-changeset:Packaging;
+			rdfs:label "Demote Role::Tiny and Class::Method::Modifiers from 'runtime recommends' dependencies to 'runtime suggests', but 'test recommends'.";
+		];
+	];
+	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
+	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.022.tar.gz>;
+	doap:revision        "0.022"^^xsd:string.
 
 <http://purl.org/NET/cpan-uri/person/tobyink>
 	a                    foaf:Person;
