@@ -13,9 +13,12 @@
 	a                    doap:Project;
 	dc:contributor       <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap-deps:develop-recommendation [ doap-deps:on "Dist::Inkt 0.001"^^doap-deps:CpanId ];
-	doap-deps:runtime-requirement [ doap-deps:on "Class::Tiny 0.005"^^doap-deps:CpanId ], [
+	doap-deps:runtime-recommendation [
 		doap-deps:on "Role::Tiny 1.000000"^^doap-deps:CpanId;
+	], [
+		doap-deps:on "Class::Method::Modifiers 1.05"^^doap-deps:CpanId;
 	];
+	doap-deps:runtime-requirement [ doap-deps:on "Class::Tiny 0.006"^^doap-deps:CpanId ];
 	doap-deps:test-requirement [ doap-deps:on "Test::More 0.96"^^doap-deps:CpanId ], [ doap-deps:on "Test::Fatal 0.003"^^doap-deps:CpanId ];
 	doap:bug-database    <http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers>;
 	doap:created         "2013-08-29"^^xsd:date;
@@ -26,7 +29,7 @@
 	doap:maintainer      <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:name            "Class-Tiny-Antlers";
 	doap:programming-language "Perl";
-	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>;
+	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-021>;
 	doap:repository      [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-class-tiny-antlers>;
@@ -55,6 +58,35 @@
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.020.tar.gz>;
 	doap:revision        "0.020"^^xsd:string.
+
+<http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-021>
+	a                    doap:Version;
+	dc:identifier        "Class-Tiny-Antlers-0.021"^^xsd:string;
+	dc:issued            "2013-09-05"^^xsd:date;
+	doap-changeset:changeset [
+		doap-changeset:item [
+			a doap-changeset:Change;
+			rdfs:label "Make the dependency on Role::Tiny optional again.";
+		], [
+			a doap-changeset:Update;
+			rdfs:label "Requires Class::Tiny 0.006.";
+		], [
+			a doap-changeset:Change;
+			rdfs:label "Actually inherit from Class::Tiny. This means that your class doesn't need to `use` both Class::Tiny and Class::Tiny::Antlers; just `use Class::Tiny::Antlers`.";
+		], [
+			a doap-changeset:Addition;
+			rdfs:label "Provide a `get_all_attribute_specs_for` method for attribute introspection.";
+		], [
+			a doap-changeset:Addition;
+			rdfs:label "Optionally export `before`, `after` and `around` keywords, powered by an optional dependency on Class::Method::Modifiers.";
+		], [
+			a doap-changeset:Change;
+			rdfs:label "Take advantage of Class::Tiny's new(ish) `create_attributes` method.";
+		];
+	];
+	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
+	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.021.tar.gz>;
+	doap:revision        "0.021"^^xsd:string.
 
 <http://purl.org/NET/cpan-uri/person/tobyink>
 	a                    foaf:Person;

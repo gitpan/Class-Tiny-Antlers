@@ -21,3 +21,4 @@ t/06required.t
 t/07extends.t
 t/08with.t
 t/09hygiene.t
+t/10modifiers.t

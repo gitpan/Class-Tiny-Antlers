@@ -35,9 +35,12 @@
          }
       },
       "runtime" : {
-         "requires" : {
-            "Class::Tiny" : "0.005",
+         "recommends" : {
+            "Class::Method::Modifiers" : "1.05",
             "Role::Tiny" : "1.000000"
+         },
+         "requires" : {
+            "Class::Tiny" : "0.006"
          }
       },
       "test" : {
@@ -50,7 +53,7 @@
    "provides" : {
       "Class::Tiny::Antlers" : {
          "file" : "lib/Class/Tiny/Antlers.pm",
-         "version" : "0.020"
+         "version" : "0.021"
       }
    },
    "release_status" : "stable",
@@ -68,6 +71,6 @@
          "web" : "https://github.com/tobyink/p5-class-tiny-antlers"
       }
    },
-   "version" : "0.020",
+   "version" : "0.021",
    "x_provides_scripts" : {}
 }

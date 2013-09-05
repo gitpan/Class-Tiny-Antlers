@@ -6,25 +6,29 @@ use strict;
 use warnings;
 
 our $AUTHORITY = 'cpan:TOBYINK';
-our $VERSION   = '0.020';
+our $VERSION   = '0.021';
 
-use Class::Tiny 0.005 ();
+use Class::Tiny 0.006 ();
+our @ISA = 'Class::Tiny';
 
 my %EXPORT_TAGS = (
 	default => [qw/ has extends with strict /],
-	all     => [qw/ has extends with strict warnings confess /],
+	all     => [qw/ has extends with before after around strict warnings confess /],
+	cmm     => [qw/ before after around /],
 );
+
+my %CLASS_ATTRIBUTES;
 
 sub import
 {
-	shift;
+	my $class = shift;
 	my %want =
 		map +($_ => 1),
 		map +(@{ $EXPORT_TAGS{substr($_, 1)} or [$_] }),
 		(@_ ? @_ : '-default');
 	
-	strict->import    if delete $want{strict};
-	warnings->import  if delete $want{warnings};
+	strict->import   if delete $want{strict};
+	warnings->import if delete $want{warnings};
 	
 	my $caller = caller;
 	_install_tracked($caller, has     => sub { unshift @_, $caller; goto \&has })     if delete $want{has};
@@ -32,7 +36,20 @@ sub import
 	_install_tracked($caller, with    => sub { unshift @_, $caller; goto \&with })    if delete $want{with};
 	_install_tracked($caller, confess => \&confess)                                   if delete $want{confess};
 	
+	for my $modifier (qw/ before after around /)
+	{
+		next unless delete $want{$modifier};
+		_install_tracked($caller, $modifier, sub
+		{
+			require Class::Method::Modifiers;
+			Class::Method::Modifiers::install_modifier($caller, $modifier, @_);
+		});
+	}
+	
 	croak("Unknown import symbols (%s)", join ", ", sort keys %want) if keys %want;
+	
+	@_ = ($class);
+	goto \&Class::Tiny::import;
 }
 
 my %INSTALLED;
@@ -95,7 +112,11 @@ sub has
 {
 	my $caller = shift;
 	my ($attr, %spec) = @_;
-
+	
+	$CLASS_ATTRIBUTES{$caller}{$attr} = +{ %spec };
+	$CLASS_ATTRIBUTES{$caller}{$attr}{is}   ||= 'ro';
+	$CLASS_ATTRIBUTES{$caller}{$attr}{lazy} ||= 1 if exists($spec{default});
+	
 	if (defined($attr) and ref($attr) eq q(ARRAY))
 	{
 		has($caller, $_, %spec) for @$attr;
@@ -192,7 +213,9 @@ sub has
 		push @methods, "sub $predicate :method { exists(\$_[0]{'$attr'}) }";
 	}
 	
-	eval "package $caller; @methods use Class::Tiny qw($attr);";
+	eval "package $caller; @methods";
+	__PACKAGE__->create_attributes($caller, $attr);
+	
 	_clean($caller, { $attr => do { no strict 'refs'; ''.\&{"$caller\::$attr"} } })
 		if $needs_clean;
 }
@@ -218,6 +241,29 @@ sub with
 	goto \&Role::Tiny::With::with;
 }
 
+sub get_all_attribute_specs_for
+{
+	my $me = shift;
+	my $class = $_[0];
+	
+	my %specs = %{ $me->get_all_attribute_defaults_for };
+	$specs{$_} =
+		defined($specs{$_})
+			? +{ is => 'rw', lazy => 1, default => $specs{$_} }
+			: +{ is => 'rw' }
+		for keys %specs;
+	
+	for my $p ( reverse @{ $class->mro::get_linear_isa } )
+	{
+		while ( my ($k, $v) = each %{$CLASS_ATTRIBUTES{$p}||{}} )
+		{
+			$specs{$k} = $v;
+		}
+	}
+	
+	\%specs;
+}
+
 1;
 
 
@@ -237,7 +283,6 @@ Class::Tiny::Antlers - Moose-like sugar for Class::Tiny
 
    {
       package Point;
-      use Class::Tiny;
       use Class::Tiny::Antlers;
       has x => (is => 'ro');
       has y => (is => 'ro');
@@ -245,7 +290,6 @@ Class::Tiny::Antlers - Moose-like sugar for Class::Tiny
    
    {
       package Point3D;
-      use Class::Tiny;
       use Class::Tiny::Antlers;
       extends 'Point';
       has z => (is => 'ro');
@@ -253,9 +297,10 @@ Class::Tiny::Antlers - Moose-like sugar for Class::Tiny
 
 =head1 DESCRIPTION
 
-Class::Tiny::Antlers provides L<Moose>-like C<has>, C<extends> and C<with>
-keywords for L<Class::Tiny>. (The C<with> keyword is implemented by
-L<Role::Tiny>.)
+Class::Tiny::Antlers provides L<Moose>-like C<has>, C<extends>, C<with>,
+C<before>, C<after> and C<around> keywords for L<Class::Tiny>.
+(The C<with> keyword requires L<Role::Tiny>; method modifiers require
+L<Class::Method::Modifiers>.)
 
 Class::Tiny doesn't support all Moose's attribute options; C<has> should
 throw you an error if you try to do something it doesn't support (like
@@ -271,12 +316,73 @@ and also imports L<strict> into its caller. You can optionally also import
 C<confess> and L<warnings>:
 
    use Class::Tiny::Antlers qw( -default confess warnings );
-   use Class::Tiny::Antlers qw( -all );   # same thing
+
+And Class::Method::Modifiers keywords:
+
+   use Class::Tiny::Antlers qw( -default before after around );
+   use Class::Tiny::Antlers qw( -default -cmm );  # same thing
+
+If you just want everything:
+
+   use Class::Tiny::Antlers qw( -all );
+
+Class::Tiny::Antlers also ensures that Class::Tiny's import method is called
+for your class.
 
 You can put a C<< no Class::Tiny::Antlers >> statement at the end of your
 class definition to wipe the imported functions out of your namespace. (This
 does not unimport strict/warnings though.) To clean up your namespace more
 thoroughly, use something like L<namespace::sweep>.
+
+=head2 Functions
+
+=over
+
+=item C<< has $attr, %spec >>
+
+Create an attribute. The specification hash roughly supports C<is>,
+C<default>, C<clearer> and C<predicate> as per L<Moose> and L<Moo>.
+
+=item C<< extends @classes >>
+
+Set the base class(es) for your class.
+
+=item C<< with @roles >>
+
+Compose L<Role::Tiny> roles with your class.
+
+=item C<< before $name, \&code >>
+
+Install a C<before> modifier using L<Class::Method::Modifiers>.
+
+=item C<< after $name, \&code >>
+
+Install a C<after> modifier using L<Class::Method::Modifiers>.
+
+=item C<< around $name, \&code >>
+
+Install a C<around> modifier using L<Class::Method::Modifiers>.
+
+=item C<< confess $format, @list >>
+
+C<sprintf>-fueled version of L<Carp>'s C<confess>.
+
+=back
+
+=head2 Methods
+
+Class::Tiny::Antlers inherits the C<get_all_attributes_for> and
+C<get_all_attribute_defaults_for> methods from Class::Tiny, and also
+provides:
+
+=over
+
+=item C<< Class::Tiny::Antlers->get_all_attribute_specs_for($class) >>
+
+Gets Moose-style attribute specification hashes for all the class'
+attributes as a big hashref. (Includes inherited attributes.)
+
+=back
 
 =head1 BUGS
 
@@ -285,7 +391,7 @@ L<http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers>.
 
 =head1 SEE ALSO
 
-L<Class::Tiny>, L<Role::Tiny>.
+L<Class::Tiny>, L<Role::Tiny>, L<Class::Method::Modifiers>.
 
 L<Moose>, L<Mouse>, L<Moo>.
 
