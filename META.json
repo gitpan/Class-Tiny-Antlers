@@ -4,10 +4,10 @@
       "Toby Inkster (TOBYINK) <tobyink@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Inkt::Profile::TOBYINK version 0.007, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Inkt::Profile::TOBYINK version 0.023, CPAN::Meta::Converter version 2.140640",
    "keywords" : [],
    "license" : [
-      "perl"
+      "perl_5"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
@@ -23,20 +23,17 @@
          "xt"
       ]
    },
+   "optional_features" : {},
    "prereqs" : {
       "configure" : {
          "requires" : {
             "ExtUtils::MakeMaker" : "6.17"
          }
       },
-      "develop" : {
-         "recommends" : {
-            "Dist::Inkt" : "0.001"
-         }
-      },
       "runtime" : {
          "requires" : {
-            "Class::Tiny" : "0.006"
+            "Class::Tiny" : "0.006",
+            "perl" : "5.006"
          },
          "suggests" : {
             "Class::Method::Modifiers" : "1.05",
@@ -58,12 +55,11 @@
    "provides" : {
       "Class::Tiny::Antlers" : {
          "file" : "lib/Class/Tiny/Antlers.pm",
-         "version" : "0.022"
+         "version" : "0.023"
       }
    },
    "release_status" : "stable",
    "resources" : {
-      "X_identifier" : "http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/project",
       "bugtracker" : {
          "web" : "http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers"
       },
@@ -73,9 +69,11 @@
       ],
       "repository" : {
          "type" : "git",
+         "url" : "git://github.com/tobyink/p5-class-tiny-antlers.git",
          "web" : "https://github.com/tobyink/p5-class-tiny-antlers"
-      }
+      },
+      "x_IRC" : "irc://irc.perl.org/#moops",
+      "x_identifier" : "http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/project"
    },
-   "version" : "0.022",
-   "x_provides_scripts" : {}
+   "version" : "0.023"
 }

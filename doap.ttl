@@ -1,3 +1,4 @@
+@prefix cpan-uri: <http://purl.org/NET/cpan-uri/terms#> .
 @prefix dc:    <http://purl.org/dc/terms/> .
 @prefix doap:  <http://usefulinc.com/ns/doap#> .
 @prefix doap-changeset: <http://ontologi.es/doap-changeset#> .
@@ -11,9 +12,9 @@
 
 <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/project>
 	a                    doap:Project;
+	cpan-uri:x_IRC       <irc://irc.perl.org/#moops>;
 	dc:contributor       <http://purl.org/NET/cpan-uri/person/tobyink>;
-	doap-deps:develop-recommendation [ doap-deps:on "Dist::Inkt 0.001"^^doap-deps:CpanId ];
-	doap-deps:runtime-requirement [ doap-deps:on "Class::Tiny 0.006"^^doap-deps:CpanId ];
+	doap-deps:runtime-requirement [ doap-deps:on "perl 5.006"^^doap-deps:CpanId ], [ doap-deps:on "Class::Tiny 0.006"^^doap-deps:CpanId ];
 	doap-deps:runtime-suggestion [
 		doap-deps:on "Role::Tiny 1.000000"^^doap-deps:CpanId;
 	], [
@@ -36,7 +37,7 @@
 	doap:maintainer      <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:name            "Class-Tiny-Antlers";
 	doap:programming-language "Perl";
-	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-021>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-022>;
+	doap:release         <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-019>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-020>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-021>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-022>, <http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-023>;
 	doap:repository      [
 		a doap:GitRepository;
 		doap:browse <https://github.com/tobyink/p5-class-tiny-antlers>;
@@ -111,6 +112,26 @@
 	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
 	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.022.tar.gz>;
 	doap:revision        "0.022"^^xsd:string.
+
+<http://purl.org/NET/cpan-uri/dist/Class-Tiny-Antlers/v_0-023>
+	a                    doap:Version;
+	dc:identifier        "Class-Tiny-Antlers-0.023"^^xsd:string;
+	dc:issued            "2014-09-18"^^xsd:date;
+	doap-changeset:changeset [
+		doap-changeset:item [
+			a doap-changeset:Packaging;
+			rdfs:label "Add IRC link.";
+		], [
+			a doap-changeset:Packaging;
+			rdfs:label "Rebuilt package with newer Dist::Inkt to resolve minor packaging issues.";
+		], [
+			a doap-changeset:Packaging;
+			rdfs:label "Add explicit dependency on Perl 5.6.";
+		];
+	];
+	doap-changeset:released-by <http://purl.org/NET/cpan-uri/person/tobyink>;
+	doap:file-release    <http://backpan.cpan.org/authors/id/T/TO/TOBYINK/Class-Tiny-Antlers-0.023.tar.gz>;
+	doap:revision        "0.023"^^xsd:string.
 
 <http://purl.org/NET/cpan-uri/person/tobyink>
 	a                    foaf:Person;

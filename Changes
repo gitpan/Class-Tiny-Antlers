@@ -6,6 +6,13 @@ Home page:    <https://metacpan.org/release/Class-Tiny-Antlers>
 Bug tracker:  <http://rt.cpan.org/Dist/Display.html?Queue=Class-Tiny-Antlers>
 Maintainer:   Toby Inkster (TOBYINK) <tobyink@cpan.org>
 
+0.023	2014-09-18
+
+ [ Packaging ]
+ - Add IRC link.
+ - Add explicit dependency on Perl 5.6.
+ - Rebuilt package with newer Dist::Inkt to resolve minor packaging issues.
+
 0.022	2013-09-05
 
  [ Packaging ]
